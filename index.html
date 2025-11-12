@@ -174,7 +174,9 @@
         const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
         const targets = document.querySelectorAll('[data-scramble]');
 
-        targets.forEach((el) => {
+        const isDisabled = () => window.matchMedia('(max-width: 950px)').matches;
+
+        const applyScramble = (el) => {
           el.dataset.scrambleOriginal = el.textContent;
 
           const keepFixed = el.hasAttribute('data-scramble-lock');
@@ -253,6 +255,36 @@
             el.textContent = el.dataset.scrambleOriginal || '';
             unlockLayout();
           });
+        };
+
+        const cleanup = () => {
+          document.querySelectorAll('[data-scramble]').forEach((el) => {
+            clearInterval(el._scrambleInterval);
+            el.textContent = el.dataset.scrambleOriginal || el.textContent;
+            el.style.display = '';
+            el.style.width = '';
+            el.style.height = '';
+            el.style.verticalAlign = '';
+            el.style.whiteSpace = '';
+            el.style.overflow = '';
+            el.dataset.scrambleLayoutLocked = 'false';
+          });
+        };
+
+        const init = () => {
+          cleanup();
+          if (isDisabled()) return;
+          document.querySelectorAll('[data-scramble]').forEach(applyScramble);
+        };
+
+        document.body.dataset.scrambleDisabled = isDisabled() ? 'true' : 'false';
+        init();
+        window.addEventListener('resize', () => {
+          const currentlyDisabled = document.body.dataset.scrambleDisabled === 'true';
+          const nextDisabled = isDisabled();
+          if (currentlyDisabled === nextDisabled) return;
+          document.body.dataset.scrambleDisabled = nextDisabled ? 'true' : 'false';
+          init();
         });
       });
     </script>
