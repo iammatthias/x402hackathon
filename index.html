@@ -100,7 +100,7 @@
     </header>
 
     <main class="relative z-20 isolate flex min-h-[calc(100vh-80px)] items-start justify-center px-4">
-      <div class="w-full max-w-6xl ">
+      <div class="relative w-full max-w-6xl ">
         <div class="grid gap-10">
           <section class="relative w-screen left-1/2 -ml-[50vw] -mt-24 pt-24 overflow-hidden min-h-fit">
             <div class="absolute -top-24 left-0 right-0 bottom-0 w-screen bg-[url('assets/background.png')] bg-cover bg-top bg-no-repeat z-0 pointer-events-none brightness-105"></div>
@@ -299,7 +299,7 @@
             </div>
           </section>
 
-          <section class="rounded-3xl border border-dashed border-white/20 bg-white/5 p-6 sm:p-8">
+          <section class="relative z-10 rounded-3xl border border-dashed border-white/20  backdrop-blur-sm p-6 sm:p-8">
             <div class="flex flex-wrap items-center justify-between gap-4">
               <div>
                 <h3 class="text-xl font-semibold text-white sm:text-2xl">Contributors</h3>
@@ -379,6 +379,9 @@
             </div>
           </section>
         </div>
+      </div>
+      <div class="absolute bottom-[-80px] opacity-50 left-0 right-0 w-full z-[1] pointer-events-none">
+        <img src="assets/lines-waves.svg" alt="" class="w-full h-auto object-cover object-bottom transform scale-150" />
       </div>
     </main>
     <footer class="relative z-20 px-6 py-10 text-center text-sm text-slate-400">
