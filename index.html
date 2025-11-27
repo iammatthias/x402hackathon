@@ -21,6 +21,8 @@
           extend: {
             fontFamily: {
               sans: ['Space Grotesk', 'Inter', 'system-ui', 'sans-serif'],
+              tiny140: ['Tiny 140', 'monospace'],
+              tiny160: ['Tiny 160', 'monospace'],
             },
             colors: {
               brand: {
@@ -33,6 +35,25 @@
       };
     </script>
     <style>
+      @font-face {
+        font-family: 'Tiny 140';
+        src: url('./fonts/TINY5x3-140.woff2') format('woff2');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'Tiny 160';
+        src: url('./fonts/TINY5x3-160.woff2') format('woff2');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+      }
+      h1.font-tiny160 {
+        font-family: 'Tiny 160', monospace;
+        font-weight: normal;
+        line-height: 0.85 !important;
+      }
       body {
         -ms-overflow-style: none;
         scrollbar-width: none;
@@ -40,45 +61,19 @@
       body::-webkit-scrollbar {
         display: none;
       }
-      .aurora {
-        position: fixed;
-        inset: -20% -10%;
-        z-index: 0;
-        background: radial-gradient(circle at 20% 20%, rgba(93, 216, 255, 0.18), transparent 45%),
-          radial-gradient(circle at 80% 30%, rgba(140, 123, 255, 0.16), transparent 50%),
-          radial-gradient(circle at 60% 75%, rgba(79, 209, 197, 0.12), transparent 50%);
-        filter: blur(45px);
-        opacity: 0.6;
-        animation: aurora-shift 18s ease-in-out infinite alternate;
-        pointer-events: none;
-      }
-      .matrix-layer {
-        position: fixed;
-        inset: 0;
-        z-index: 5;
-        pointer-events: none;
-        mix-blend-mode: screen;
-        opacity: 0.7;
-      }
-      @keyframes aurora-shift {
-        0% {
-          transform: translate3d(0, -2%, 0) scale(1);
-          opacity: 0.55;
-        }
-        50% {
-          transform: translate3d(4%, 3%, 0) scale(1.05);
-          opacity: 0.68;
-        }
-        100% {
-          transform: translate3d(-3%, 5%, 0) scale(1.08);
-          opacity: 0.58;
-        }
+      .noise-layer {
+        background: #1E243C;
+        filter: url(#noiseFilter);
       }
     </style>
+    <svg style="position: absolute; width: 0; height: 0;">
+      <filter id="noiseFilter">
+        <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="10" stitchTiles="stitch"/>
+        <feColorMatrix type="saturate" values="0"/>
+      </filter>
+    </svg>
   </head>
-  <body class="relative min-h-screen bg-[radial-gradient(circle_at_15%_90%,rgba(92,216,255,0.08),transparent_40%),radial-gradient(circle_at_85%_100%,rgba(140,123,255,0.15),transparent_45%),linear-gradient(140deg,#02030c,#05070f_65%,#02030c)] text-slate-50 font-sans antialiased overscroll-none">
-    <div class="aurora"></div>
-    <div id="matrixLayer" class="matrix-layer"></div>
+  <body class="relative min-h-screen bg-[#1E243C] text-slate-50 font-sans antialiased overscroll-none overflow-x-hidden">
     <header class="sticky top-0 z-30 w-full px-6 py-5 backdrop-blur-2xl ">
       <div class="mx-auto flex w-full max-w-6xl items-center justify-between">
         <a href="https://www.x402.org/" target="_blank" rel="noreferrer" class="flex items-center gap-3">
@@ -88,43 +83,41 @@
           href="https://airtable.com/appnYZo360sWuEYLS/pagiPnZRtuwURuAd4/form"
           target="_blank"
           rel="noreferrer"
-          class="inline-flex items-center rounded-full border border-white/15 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.3em] text-slate-200 transition hover:border-white/40 hover:text-white"
+          class="inline-flex items-center rounded-full border border-white/40 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.3em] text-slate-200 transition hover:border-white/40 hover:text-white"
         >
           <span data-scramble data-scramble-slow data-scramble-lock>Join</span>
         </a>
       </div>
     </header>
 
-    <main class="relative z-20 isolate flex min-h-[calc(100vh-80px)] items-start justify-center px-4 py-10 sm:py-12 lg:py-16">
+    <main class="relative z-20 isolate flex min-h-[calc(100vh-80px)] items-start justify-center px-4">
       <div class="w-full max-w-6xl ">
-        <div class="grid gap-10 p-6 sm:p-9 lg:p-12">
-          <section class="grid gap-6">
-            <span class="inline-flex w-fit items-center gap-2 rounded-full border border-white/10 px-4 py-1 text-xs uppercase tracking-[0.3em] text-slate-300" data-scramble data-scramble-nowrap>
-              Open to all builders
-            </span>
-            <div class="max-w-4xl">
-              <h1 class="text-7xl font-semibold leading-tight tracking-tight text-white sm:text-8xl lg:text-[6.5rem]" data-scramble data-scramble-nowrap>
-                x402 Hackathon
-              </h1>
-              <p class="mt-5 text-lg text-slate-300 sm:text-xl" data-scramble>
-                Build the next era of agents and internet-native payments.
-              </p>
-            </div>
-            <div class="flex flex-wrap items-center gap-6">
-              <a
-                class="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-brand-cyan to-brand-indigo px-8 py-3 text-base font-semibold text-slate-950 ring-1 ring-white/30 transition hover:-translate-y-0.5 hover:ring-white/60"
-                href="https://airtable.com/appnYZo360sWuEYLS/pagiPnZRtuwURuAd4/form"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <span>APPLY TO BUILD</span>
-              </a>
-              <dl class="flex flex-wrap gap-6 text-sm text-slate-300">
-                <div>
+        <div class="grid gap-10">
+          <section class="relative w-screen left-1/2 -ml-[50vw] -mt-24 pt-24 overflow-hidden min-h-fit">
+            <div class="absolute -top-24 left-0 right-0 bottom-0 w-screen bg-[url('assets/background.png')] bg-cover bg-top bg-no-repeat z-0 pointer-events-none"></div>
+            <div class="absolute -top-24 left-0 right-0 bottom-0 w-screen noise-layer z-[1] pointer-events-none opacity-30"></div>
+            <div class="absolute -top-24 left-0 right-0 bottom-0 w-screen z-[2] pointer-events-none" style="background: linear-gradient(to top, #1E243C 0%, #1E243C 1%, rgba(30, 36, 60, 0) 60%);"></div>
+            <div class="relative z-10 mx-auto w-full max-w-6xl px-4">
+        <div class="grid gap-6 p-6 sm:p-9 lg:p-12 pt-10 sm:pt-12 lg:pt-16">
+          <span class="inline-flex w-fit items-center gap-2 rounded-full border border-white/40 px-4 py-1 text-xs uppercase tracking-[0.3em] text-white font-semibold mx-auto" data-scramble data-scramble-nowrap>
+            Open to all builders
+          </span>
+          <div class="max-w-4xl mx-auto">
+            <h1 class="font-tiny160 text-9xl text-center text-white sm:text-9xl lg:text-[8rem]" data-scramble data-scramble-nowrap>
+              x402 Hackathon
+            </h1>
+            <p class="mt-5 text-lg text-white/80 sm:text-xl text-center" data-scramble>
+              Build the next era of agents and internet-native payments.
+            </p>
+          </div>
+          <div class="flex flex-col items-center gap-6">
+            
+              <dl class="flex flex-wrap gap-6 text-sm text-slate-300 justify-center">
+                <div class="flex flex-col items-center">
                   <dt class="uppercase tracking-[0.25em] text-xs">Timeline</dt>
-                  <dd class="text-base font-semibold text-white">Nov 25 – Dec 20, 2025</dd>
+                  <dd class="text-base font-semibold text-white">Nov 25 - Dec 20, 2025</dd>
                 </div>
-                <div>
+                <div class="flex flex-col items-center">
                   <dt class="uppercase tracking-[0.25em] text-xs">Format</dt>
                   <dd class="text-base font-semibold text-white">Virtual</dd>
                 </div>
@@ -133,11 +126,23 @@
                   <dd class="text-base font-semibold text-white">$50k + Grants</dd> -->
                 </div>
               </dl>
+              <a
+                class="inline-flex items-center justify-center text-sm rounded-full bg-white/40 px-8 py-3 text-base font-semibold tracking-[0.3em] text-white transition hover:bg-white/60"
+                href="https://airtable.com/appnYZo360sWuEYLS/pagiPnZRtuwURuAd4/form"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span>APPLY TO BUILD</span>
+              </a>
             </div>
 
-            <p class="text-lg leading-relaxed text-slate-300 md:text-xl" data-scramble>
+          <div class="max-w-2xl mx-auto">
+            <p class="text-lg leading-relaxed text-center text-slate-300 mb-20 md:text-xl" data-scramble>
               A focused event to push the web forward with real-world experiences. Remote, curated, and intentionally small.
             </p>
+          </div>
+        </div>
+      </div>
           </section>
 
           <section class="rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-8">
@@ -371,92 +376,6 @@
         https://www.x402.org
       </a>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
-    <script>
-      window.addEventListener('load', () => {
-        const container = document.getElementById('matrixLayer');
-        if (!container || !window.THREE) return;
-        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-        if (prefersReducedMotion.matches) return;
-
-        let renderer, scene, camera, points, speeds, positions, geometry;
-
-        const init = () => {
-          const width = window.innerWidth;
-          const height = window.innerHeight;
-          const particleCount = width < 768 ? 600 : 1100;
-
-          try {
-            renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-          } catch (err) {
-            return;
-          }
-          renderer.setPixelRatio(window.devicePixelRatio);
-          renderer.setSize(width, height);
-          container.innerHTML = '';
-          container.appendChild(renderer.domElement);
-
-          scene = new THREE.Scene();
-          camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 1000);
-          camera.position.set(0, 0, 35);
-
-          geometry = new THREE.BufferGeometry();
-          positions = new Float32Array(particleCount * 3);
-          speeds = new Float32Array(particleCount);
-
-          for (let i = 0; i < particleCount; i++) {
-            positions[i * 3] = (Math.random() - 0.5) * 60;
-            positions[i * 3 + 1] = Math.random() * 60;
-            positions[i * 3 + 2] = (Math.random() - 0.5) * 25;
-            speeds[i] = 0.05 + Math.random() * 0.12;
-          }
-
-          geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-
-          const material = new THREE.PointsMaterial({
-            color: 0x6dd2ff,
-            size: 0.15,
-            transparent: true,
-            opacity: 0.09,
-            blending: THREE.AdditiveBlending,
-            depthWrite: false,
-          });
-
-          points = new THREE.Points(geometry, material);
-          scene.add(points);
-        };
-
-        const animate = () => {
-          if (!renderer) return;
-          const array = geometry.attributes.position.array;
-          for (let i = 0; i < speeds.length; i++) {
-            array[i * 3 + 1] -= speeds[i];
-            if (array[i * 3 + 1] < -30) {
-              array[i * 3 + 1] = 30;
-              array[i * 3] = (Math.random() - 0.5) * 60;
-              array[i * 3 + 2] = (Math.random() - 0.5) * 25;
-            }
-          }
-          geometry.attributes.position.needsUpdate = true;
-          points.rotation.y += 0.0005;
-          renderer.render(scene, camera);
-          requestAnimationFrame(animate);
-        };
-
-        const onResize = () => {
-          if (!renderer || !camera) return;
-          const width = window.innerWidth;
-          const height = window.innerHeight;
-          renderer.setSize(width, height);
-          camera.aspect = width / height;
-          camera.updateProjectionMatrix();
-        };
-
-        init();
-        animate();
-        window.addEventListener('resize', onResize);
-      });
-    </script>
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
