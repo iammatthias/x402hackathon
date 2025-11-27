@@ -62,13 +62,13 @@
         display: none;
       }
       .noise-layer {
-        background: #1E243C;
+        background: #2c2e38;
         filter: url(#noiseFilter);
       }
     </style>
     <svg style="position: absolute; width: 0; height: 0;">
       <filter id="noiseFilter">
-        <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="10" stitchTiles="stitch"/>
+        <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="12" stitchTiles="stitch"/>
         <feColorMatrix type="saturate" values="0"/>
       </filter>
     </svg>
@@ -95,6 +95,9 @@
         <div class="grid gap-10">
           <section class="relative w-screen left-1/2 -ml-[50vw] -mt-24 pt-24 overflow-hidden min-h-fit">
             <div class="absolute -top-24 left-0 right-0 bottom-0 w-screen bg-[url('assets/background.png')] bg-cover bg-top bg-no-repeat z-0 pointer-events-none"></div>
+            <div class="absolute -top-24 left-0 right-0 bottom-0 w-screen z-[0.5] pointer-events-none flex items-center justify-center overflow-hidden">
+              <img src="assets/lines-star.svg" alt="" class="w-full h-full object-contain object-center transform scale-[1.75]" />
+            </div>
             <div class="absolute -top-24 left-0 right-0 bottom-0 w-screen noise-layer z-[1] pointer-events-none opacity-30"></div>
             <div class="absolute -top-24 left-0 right-0 bottom-0 w-screen z-[2] pointer-events-none" style="background: linear-gradient(to top, #1E243C 0%, #1E243C 1%, rgba(30, 36, 60, 0) 60%);"></div>
             <div class="relative z-10 mx-auto w-full max-w-6xl px-4">
@@ -103,7 +106,7 @@
             Open to all builders
           </span>
           <div class="max-w-4xl mx-auto">
-            <h1 class="font-tiny160 text-9xl text-center text-white sm:text-9xl lg:text-[8rem]" data-scramble data-scramble-nowrap>
+            <h1 class="font-tiny160 text-9xl text-center text-white sm:text-9xl lg:text-[8rem] opacity-70 hover:opacity-100 transition-opacity duration-1000" data-scramble data-scramble-nowrap>
               x402 Hackathon
             </h1>
             <p class="mt-5 text-lg text-white/80 sm:text-xl text-center" data-scramble>
@@ -127,7 +130,7 @@
                 </div>
               </dl>
               <a
-                class="inline-flex items-center justify-center text-sm rounded-full bg-white/40 px-8 py-3 text-base font-semibold tracking-[0.3em] text-white transition hover:bg-white/60"
+                class="inline-flex items-center justify-center text-sm rounded-full px-8 py-3 text-base font-semibold tracking-[0.3em] text-white transition opacity-70 bg-gradient-to-r from-[rgba(56,189,248,0.25)] to-[rgba(74,222,128,0.3)] hover:opacity-100 transition-opacity duration-1000"
                 href="https://airtable.com/appnYZo360sWuEYLS/pagiPnZRtuwURuAd4/form"
                 target="_blank"
                 rel="noreferrer"
