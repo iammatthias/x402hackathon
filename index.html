@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" class="bg-[#030616] overscroll-none">
+<html lang="en" class="bg-[#030616] overscroll-none" data-lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>x402 Hackathon — Build Internet-Native Payments</title>
+    <title data-i18n="meta.title">x402 Hackathon - Build Internet-Native Payments</title>
     <meta
       name="description"
+      data-i18n-attr="content"
+      data-i18n="meta.description"
       content="An invite-only sprint for builders shipping agents, protocols, and products on the x402 standard."
     />
     <meta property="og:image" content="assets/Thumbnail.png" />
@@ -123,6 +125,18 @@
         <a href="https://www.x402.org/" target="_blank" rel="noreferrer" class="flex items-center gap-3">
           <img src="x402_logo.png" alt="x402 logo" class="h-8 w-auto drop-shadow-[0_15px_35px_rgba(3,7,18,0.45)]" />
         </a>
+        <!-- Language Switcher -->
+        <div class="relative inline-flex items-center">
+          <select id="langSwitcher" class="appearance-none bg-white/20 backdrop-blur-sm border border-slate-700/50 rounded-full px-4 py-1.5 pr-8 text-xs font-semibold uppercase tracking-[0.3em] text-slate-800 cursor-pointer hover:bg-white/30 transition focus:outline-none">
+            <option value="en" class="bg-slate-900 text-white">EN</option>
+            <option value="es" class="bg-slate-900 text-white">ES</option>
+            <option value="fr" class="bg-slate-900 text-white">FR</option>
+            <option value="pt" class="bg-slate-900 text-white">PT</option>
+          </select>
+          <svg class="pointer-events-none absolute right-3 h-3 w-3 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </div>
       </div>
     </header>
 
@@ -138,14 +152,14 @@
             <div class="absolute -top-24 bottom-0 left-0 right-0 z-[2] pointer-events-none" style="background: linear-gradient(to top, #1E243C 0%, #1E243C 2%, rgba(30, 36, 60, 0) 60%);"></div>
             <div class="relative z-10 mx-auto w-full max-w-6xl px-4">
         <div class="grid gap-6 p-6 sm:p-9 lg:p-12 pt-10 sm:pt-12 lg:pt-16">
-          <span class="inline-flex w-fit items-center gap-1 sm:gap-2 rounded-full border border-white/40 px-2.5 sm:px-4 py-0.5 sm:py-1 text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.3em] text-white font-semibold mx-auto" data-scramble data-scramble-nowrap>
+          <span class="inline-flex w-fit items-center gap-1 sm:gap-2 rounded-full border border-white/40 px-2.5 sm:px-4 py-0.5 sm:py-1 text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.3em] text-white font-semibold mx-auto" data-scramble data-scramble-nowrap data-i18n="hero.badge">
             Open to all builders
           </span>
           <div class="max-w-4xl mx-auto">
-            <h1 class="font-tiny160 text-8xl text-center text-white sm:text-9xl md:text-9xl lg:text-[8rem] xl:text-[10rem]" data-scramble data-scramble-nowrap>
+            <h1 class="font-tiny160 text-8xl text-center text-white sm:text-9xl md:text-9xl lg:text-[8rem] xl:text-[10rem]" data-scramble data-scramble-nowrap data-i18n="hero.title">
               x402 Hackathon
             </h1>
-            <p class="mt-5 text-base text-white/80 sm:text-lg md:text-xl text-center" data-scramble>
+            <p class="mt-5 text-base text-white/80 sm:text-lg md:text-xl text-center" data-scramble data-i18n="hero.tagline">
               Build the next era of agents and internet-native payments.
             </p>
           </div>
@@ -153,12 +167,12 @@
             
               <dl class="flex flex-wrap gap-4 sm:gap-6 text-xs sm:text-sm text-slate-300 justify-center">
                 <div class="flex flex-col items-center">
-                  <dt class="uppercase tracking-[0.25em] text-[10px] sm:text-xs">Timeline</dt>
-                  <dd class="text-sm sm:text-base font-semibold text-white">December 8, 2025 - January 5, 2026</dd>
+                  <dt class="uppercase tracking-[0.25em] text-[10px] sm:text-xs" data-i18n="hero.timeline">Timeline</dt>
+                  <dd class="text-sm sm:text-base font-semibold text-white" data-i18n="hero.date">December 8, 2025 - January 5, 2026</dd>
                 </div>
                 <div class="flex flex-col items-center">
-                  <dt class="uppercase tracking-[0.25em] text-[10px] sm:text-xs">Format</dt>
-                  <dd class="text-sm sm:text-base font-semibold text-white">Virtual</dd>
+                  <dt class="uppercase tracking-[0.25em] text-[10px] sm:text-xs" data-i18n="hero.format">Format</dt>
+                  <dd class="text-sm sm:text-base font-semibold text-white" data-i18n="hero.virtual">Virtual</dd>
                 </div>
                 <div>
                   <!-- <dt class="uppercase tracking-[0.25em] text-xs">Prize Pool</dt>
@@ -172,7 +186,7 @@
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <span>SUBMIT YOUR BUILD</span>
+                  <span data-i18n="hero.submit">SUBMIT YOUR BUILD</span>
                 </a>
                 <a
                   class="inline-flex items-center justify-center text-xs sm:text-sm rounded-full px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-semibold tracking-[0.2em] sm:tracking-[0.3em] text-white transition border border-white/40 hover:bg-white/10 transition-all duration-300"
@@ -180,13 +194,13 @@
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <span>JOIN HACKATHON CHAT</span>
+                  <span data-i18n="hero.chat">JOIN HACKATHON CHAT</span>
                 </a>
               </div>
             </div>
 
           <div class="max-w-2xl mx-auto">
-            <p class="text-base leading-relaxed text-center text-slate-300 mb-20 sm:text-lg" >
+            <p class="text-base leading-relaxed text-center text-slate-300 mb-20 sm:text-lg" data-i18n="hero.description">
               You do not need to apply to participate, just submit your project by January 5th, 2026. Code submitted must be written during this time period.
             </p>
           </div>
@@ -197,9 +211,9 @@
           <section class="rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-8">
             <div class="flex flex-col gap-6">
               <div>
-                <p data-scramble  class="text-sm uppercase tracking-[0.35em] text-white/70">Mentor bench</p>
-                <h2 data-scramble class="mt-2 text-3xl font-semibold text-white">Experts who ship with you</h2>
-                <p data-scramble class="mt-3 text-base text-slate-300">
+                <p data-scramble class="text-sm uppercase tracking-[0.35em] text-white/70" data-i18n="mentors.label">Mentor bench</p>
+                <h2 data-scramble class="mt-2 text-3xl font-semibold text-white" data-i18n="mentors.heading">Experts who ship with you</h2>
+                <p data-scramble class="mt-3 text-base text-slate-300" data-i18n="mentors.description">
                   A tight roster of hands-on mentors sharing expertise across product, AI, infrastructure, and GTM.
                 </p>
               </div>
@@ -336,54 +350,18 @@
                   <p class="text-sm text-slate-300">thirdweb</p>
                 </div>
               </a>
-                <a
-                  class="flex items-center gap-4 rounded-2xl border border-white/10 bg-slate-900/40 p-4 transition hover:border-white/40"
-                  href="https://x.com/cryptofede"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <img src="images/fede.png" alt="Fede" class="h-16 w-16 rounded-full object-cover" />
-                  <div>
-                    <p class="text-lg font-semibold text-white">Fede</p>
-                    <p class="text-sm text-slate-300">Crossmint</p>
-                  </div>
-                </a>
-                <a
-                  class="flex items-center gap-4 rounded-2xl border border-white/10 bg-slate-900/40 p-4 transition hover:border-white/40"
-                  href="https://x.com/probablyangg"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <img src="images/angela.jpg" alt="Angela" class="h-16 w-16 rounded-full object-cover" />
-                  <div>
-                    <p class="text-lg font-semibold text-white">Angela</p>
-                    <p class="text-sm text-slate-300">Crossmint</p>
-                  </div>
-                </a>
-                <a
-                  class="flex items-center gap-4 rounded-2xl border border-white/10 bg-slate-900/40 p-4 transition hover:border-white/40"
-                  href="https://x.com/henloitsjoyce"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <img src="images/joyce.png" alt="Joyce" class="h-16 w-16 rounded-full object-cover" />
-                  <div>
-                    <p class="text-lg font-semibold text-white">Joyce</p>
-                    <p class="text-sm text-slate-300">Crossmint</p>
-                  </div>
-                </a>
               <a
-              class="flex items-center gap-4 rounded-2xl border border-white/10 bg-slate-900/40 p-4 transition hover:border-white/40"
-              href="https://x.com/classicscuba"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <img src="images/pontus.jpg" alt="Pontus Andersson" class="h-16 w-16 rounded-full object-cover" />
-              <div>
-                <p class="text-lg font-semibold text-white">Pontus Andersson</p>
-                <p class="text-sm text-slate-300">Corbits + Faremeter</p>
-              </div>
-            </a>
+                class="flex items-center gap-4 rounded-2xl border border-white/10 bg-slate-900/40 p-4 transition hover:border-white/40"
+                href="https://x.com/classicscuba"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img src="images/pontus.jpg" alt="Pontus Andersson" class="h-16 w-16 rounded-full object-cover" />
+                <div>
+                  <p class="text-lg font-semibold text-white">Pontus Andersson</p>
+                  <p class="text-sm text-slate-300">Corbits + Faremeter</p>
+                </div>
+              </a>
               </div>
             </div>
           </section>
@@ -391,19 +369,16 @@
           <section class="rounded-3xl border border-white/10 bg-slate-900/60 p-6 sm:p-8 lg:p-9">
             <div class="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
               <div class="max-w-2xl space-y-4">
-                <h2 class="text-2xl font-semibold text-white sm:text-3xl">Format</h2>
-                <p class="
-                text-base leading-relaxed text-slate-300 sm:text-lg">
-                 A 4 week virtual event focused on shipping real products, apps, and impactful open source. Participants will receive mentorship from industry experts. <br /><br />
-                 
-                 Please note that there are no financial prizes for this hackathon. Winners will receive marketing and distribution support from contributors such as social posts and live streams. They will also have access to mentorship, invitations to major events and hacker houses, and potential grant opportunities.
+                <h2 class="text-2xl font-semibold text-white sm:text-3xl" data-i18n="formatSection.heading">Format</h2>
+                <p class="text-base leading-relaxed text-slate-300 sm:text-lg" data-i18n="formatSection.description">
+                 A 4 week virtual event focused on shipping real products, apps, and impactful open source. Participants will receive mentorship from industry experts. Please note that there are no financial prizes for this hackathon. Winners will receive marketing and distribution support from contributors such as social posts and live streams. They will also have access to mentorship, invitations to major events and hacker houses, and potential grant opportunities.
                 </p>
               </div>
               <a
                 target="_blank"
-                href="https://www.notion.so/Builder-Resources-2bd3db1c88a78060bddfe8c03bf88c1a"
-                class="inline-flex items-center justify-center rounded-full border border-white/60 bg-white/10 hover:bg-white/30 px-8 py-3 text-base font-semibold tracking-[0.3em] text-white transition duration-1000"
-                <span>RESOURCES</span>
+                href="https://x402.gitbook.io/x402"
+                class="inline-flex items-center justify-center rounded-full border border-white/60 bg-white/10 hover:bg-white/30 px-8 py-3 text-base font-semibold tracking-[0.3em] text-white transition duration-1000">
+                <span data-i18n="formatSection.resources">RESOURCES</span>
               </a>
               <!-- <div class="grid flex-1 grid-cols-1 gap-4 sm:grid-cols-3">
                 <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
@@ -425,9 +400,14 @@
           <section class="relative z-10 rounded-3xl border border-dashed border-white/20  backdrop-blur-sm p-6 sm:p-8">
             <div class="flex flex-wrap items-center justify-between gap-4">
               <div>
-                <h3 class="text-xl font-semibold text-white sm:text-2xl">Contributors</h3>
-                <p class="text-sm text-slate-300" data-scramble>Slots available · inquire for details</p>
+                <h3 class="text-xl font-semibold text-white sm:text-2xl" data-i18n="contributors.heading">Contributors</h3>
+                <p class="text-sm text-slate-300" data-scramble data-i18n="contributors.slots">Slots available - inquire for details</p>
               </div>
+              <button
+                class="rounded-full border border-white/20 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-slate-300 transition hover:border-white/40 hover:text-white"
+              >
+                <span data-scramble data-scramble-lock data-i18n="contributors.become">Become a contributor</span>
+              </button>
             </div>
             <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               <a
@@ -503,13 +483,13 @@
               <img src="images/thirdweb.svg" alt="thirdweb logo" style="width: 120px;" class="max-h-12 w-auto opacity-90" />
             </a>
             <a
-            class="flex h-28 items-center justify-center rounded-2xl border border-white/10 bg-slate-900/40 px-6 transition hover:border-white/40"
-            href="https://corbits.dev"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <img src="images/corbits.png" alt="corbits logo" style="width: 120px;" class="max-h-12 w-auto opacity-90" />
-          </a>
+              class="flex h-28 items-center justify-center rounded-2xl border border-white/10 bg-slate-900/40 px-6 transition hover:border-white/40"
+              href="https://corbits.dev"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img src="images/corbits.svg" alt="corbits logo" style="width: 120px;" class="max-h-12 w-auto opacity-90" />
+            </a>
             </div>
           </section>
         </div>
@@ -520,13 +500,13 @@
     </main>
     <footer class="relative z-20 px-6 py-10 text-center text-sm text-slate-400">
       <p>
-        To learn more about x402, visit
+        <span data-i18n="footer.learnMore">To learn more about x402, visit</span>
         <a href="https://www.x402.org" target="_blank" rel="noreferrer" class="text-brand-cyan transition hover:text-white">
           https://www.x402.org
         </a>
       </p>
       <p class="mt-2">
-        <a href="terms.html" class="text-slate-500 transition hover:text-white">
+        <a href="terms.html" class="text-slate-500 transition hover:text-white" data-i18n="footer.terms">
           Terms and Conditions
         </a>
       </p>
@@ -735,6 +715,116 @@
           init();
         });
       });
+    </script>
+    <!-- i18n Internationalization -->
+    <script>
+      (function() {
+        const i18n = {
+          translations: {},
+          currentLang: 'en',
+          supportedLangs: ['en', 'es', 'fr', 'pt'],
+
+          async loadTranslations(lang) {
+            try {
+              const response = await fetch(`./i18n/${lang}.json`);
+              if (!response.ok) throw new Error('Translation file not found');
+              this.translations[lang] = await response.json();
+              return true;
+            } catch (error) {
+              console.error(`Failed to load translations for ${lang}:`, error);
+              return false;
+            }
+          },
+
+          getNestedValue(obj, path) {
+            return path.split('.').reduce((current, key) => current && current[key], obj);
+          },
+
+          translate(key) {
+            const translation = this.getNestedValue(this.translations[this.currentLang], key);
+            if (!translation) {
+              const fallback = this.getNestedValue(this.translations['en'], key);
+              return fallback || key;
+            }
+            return translation;
+          },
+
+          applyTranslations() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+              const key = el.getAttribute('data-i18n');
+              const translation = this.translate(key);
+
+              const attrToUpdate = el.getAttribute('data-i18n-attr');
+              if (attrToUpdate) {
+                el.setAttribute(attrToUpdate, translation);
+              } else if (el.tagName === 'TITLE') {
+                document.title = translation;
+              } else {
+                el.textContent = translation;
+                if (el.hasAttribute('data-scramble')) {
+                  el.dataset.scrambleOriginal = translation;
+                }
+              }
+            });
+
+            document.documentElement.lang = this.currentLang;
+            document.documentElement.dataset.lang = this.currentLang;
+          },
+
+          async setLanguage(lang) {
+            if (!this.supportedLangs.includes(lang)) {
+              lang = 'en';
+            }
+
+            if (!this.translations[lang]) {
+              await this.loadTranslations(lang);
+            }
+
+            if (!this.translations['en']) {
+              await this.loadTranslations('en');
+            }
+
+            this.currentLang = lang;
+            localStorage.setItem('preferredLanguage', lang);
+            this.applyTranslations();
+
+            const langSwitcher = document.getElementById('langSwitcher');
+            if (langSwitcher) {
+              langSwitcher.value = lang;
+            }
+          },
+
+          async init() {
+            const savedLang = localStorage.getItem('preferredLanguage');
+            const browserLang = navigator.language.split('-')[0];
+            const initialLang = savedLang || (this.supportedLangs.includes(browserLang) ? browserLang : 'en');
+
+            await this.loadTranslations('en');
+            if (initialLang !== 'en') {
+              await this.loadTranslations(initialLang);
+            }
+
+            this.currentLang = initialLang;
+            this.applyTranslations();
+
+            const langSwitcher = document.getElementById('langSwitcher');
+            if (langSwitcher) {
+              langSwitcher.value = initialLang;
+              langSwitcher.addEventListener('change', (e) => {
+                this.setLanguage(e.target.value);
+              });
+            }
+          }
+        };
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', () => i18n.init());
+        } else {
+          i18n.init();
+        }
+
+        window.i18n = i18n;
+      })();
     </script>
   </body>
 </html>

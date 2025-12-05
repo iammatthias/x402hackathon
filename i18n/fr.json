@@ -1,0 +1,49 @@
+{
+  "meta": {
+    "title": "x402 Hackathon - Construisez des Paiements Natifs d'Internet",
+    "description": "Un sprint ouvert pour les constructeurs qui developpent des agents, protocoles et produits sur le standard x402."
+  },
+  "header": {
+    "join": "Rejoindre"
+  },
+  "hero": {
+    "badge": "Ouvert a tous les constructeurs",
+    "title": "x402 Hackathon",
+    "tagline": "Construisez la prochaine ere des agents et des paiements natifs d'internet.",
+    "timeline": "Calendrier",
+    "date": "8 Decembre 2025 - 5 Janvier 2026",
+    "format": "Format",
+    "virtual": "Virtuel",
+    "submit": "SOUMETTRE VOTRE PROJET",
+    "chat": "REJOINDRE LE CHAT",
+    "description": "Vous n'avez pas besoin de postuler pour participer, soumettez simplement votre projet avant le 5 janvier 2026. Le code soumis doit etre ecrit pendant cette periode."
+  },
+  "mentors": {
+    "label": "Mentors",
+    "heading": "Des experts qui construisent avec vous",
+    "description": "Une equipe selecte de mentors pratiques partageant leur expertise en produit, IA, infrastructure et GTM."
+  },
+  "formatSection": {
+    "heading": "Format",
+    "description": "Un evenement virtuel de 4 semaines axe sur le lancement de produits reels, d'applications et d'open source impactant. Les participants recevront un mentorat d'experts de l'industrie. Veuillez noter qu'il n'y a pas de prix financiers pour ce hackathon. Les gagnants recevront un soutien marketing et distribution des contributeurs tels que des publications sur les reseaux sociaux et des diffusions en direct. Ils auront egalement acces au mentorat, des invitations a des evenements majeurs et des hacker houses, et des opportunites potentielles de subventions.",
+    "resources": "RESSOURCES"
+  },
+  "contributors": {
+    "heading": "Contributeurs",
+    "slots": "Places disponibles - renseignez-vous pour plus de details",
+    "become": "Devenir contributeur"
+  },
+  "footer": {
+    "learnMore": "Pour en savoir plus sur x402, visitez",
+    "terms": "Termes et Conditions"
+  },
+  "terms": {
+    "pageTitle": "Termes et Conditions — x402 Hackathon",
+    "metaDescription": "Termes et Conditions pour le x402 Hackathon",
+    "title": "Termes et Conditions",
+    "lastUpdated": "Derniere mise a jour:",
+    "legalNotice": "Ces Termes et Conditions sont uniquement disponibles en anglais.",
+    "backToHackathon": "← Retour au Hackathon",
+    "backFooter": "← Retour a x402 Hackathon"
+  }
+}
