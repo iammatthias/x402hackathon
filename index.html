@@ -8,8 +8,16 @@
       name="description"
       content="An invite-only sprint for builders shipping agents, protocols, and products on the x402 standard."
     />
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
-    <link rel="apple-touch-icon" href="images/favicon.ico" />
+    <meta property="og:image" content="assets/Thumbnail.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="assets/Thumbnail.png" />
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <link rel="apple-touch-icon" href="assets/favicon.png" />
+    <!-- Preload custom font to prevent FOUT -->
+    <link rel="preload" href="./fonts/TINY5x3-160.woff2" as="font" type="font/woff2" crossorigin>
+    <!-- Preconnect to Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
@@ -21,6 +29,7 @@
           extend: {
             fontFamily: {
               sans: ['Space Grotesk', 'Inter', 'system-ui', 'sans-serif'],
+              tiny160: ['Tiny 160', 'monospace'],
             },
             colors: {
               brand: {
@@ -33,6 +42,33 @@
       };
     </script>
     <style>
+      @font-face {
+        font-family: 'Tiny 160';
+        src: url('./fonts/TINY5x3-160.woff2') format('woff2');
+        font-weight: normal;
+        font-style: normal;
+        font-display: block;
+      }
+      /* Ensure background colors are applied immediately (not relying on Tailwind) */
+      html {
+        background-color: #030616;
+      }
+      body {
+        background-color: #1E243C;
+      }
+      /* Prevent FOUT by hiding content until fonts load */
+      .fonts-loading > *:not(script) {
+        opacity: 0;
+      }
+      .fonts-loaded > *:not(script) {
+        opacity: 1;
+        transition: opacity 0.2s ease-in;
+      }
+      h1.font-tiny160 {
+        font-family: 'Tiny 160', monospace;
+        font-weight: normal;
+        line-height: 0.85 !important;
+      }
       body {
         -ms-overflow-style: none;
         scrollbar-width: none;
@@ -40,17 +76,9 @@
       body::-webkit-scrollbar {
         display: none;
       }
-      .aurora {
-        position: fixed;
-        inset: -20% -10%;
-        z-index: 0;
-        background: radial-gradient(circle at 20% 20%, rgba(93, 216, 255, 0.18), transparent 45%),
-          radial-gradient(circle at 80% 30%, rgba(140, 123, 255, 0.16), transparent 50%),
-          radial-gradient(circle at 60% 75%, rgba(79, 209, 197, 0.12), transparent 50%);
-        filter: blur(45px);
-        opacity: 0.6;
-        animation: aurora-shift 18s ease-in-out infinite alternate;
-        pointer-events: none;
+      .noise-layer {
+        background: #2c2e38;
+        filter: url(#noiseFilter);
       }
       .matrix-layer {
         position: fixed;
@@ -60,84 +88,110 @@
         mix-blend-mode: screen;
         opacity: 0.7;
       }
-      @keyframes aurora-shift {
-        0% {
-          transform: translate3d(0, -2%, 0) scale(1);
-          opacity: 0.55;
-        }
-        50% {
-          transform: translate3d(4%, 3%, 0) scale(1.05);
-          opacity: 0.68;
-        }
-        100% {
-          transform: translate3d(-3%, 5%, 0) scale(1.08);
-          opacity: 0.58;
-        }
-      }
     </style>
+    <svg style="position: absolute; width: 0; height: 0;">
+      <filter id="noiseFilter">
+        <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="12" stitchTiles="stitch"/>
+        <feColorMatrix type="saturate" values="0"/>
+      </filter>
+    </svg>
   </head>
-  <body class="relative min-h-screen bg-[radial-gradient(circle_at_15%_90%,rgba(92,216,255,0.08),transparent_40%),radial-gradient(circle_at_85%_100%,rgba(140,123,255,0.15),transparent_45%),linear-gradient(140deg,#02030c,#05070f_65%,#02030c)] text-slate-50 font-sans antialiased overscroll-none">
-    <div class="aurora"></div>
+  <body class="fonts-loading relative min-h-screen bg-[#1E243C] text-slate-50 font-sans antialiased overscroll-none overflow-x-hidden">
+    <script>
+      // Wait for fonts to load before showing content to prevent FOUT
+      (function() {
+        var showContent = function() {
+          document.body.classList.remove('fonts-loading');
+          document.body.classList.add('fonts-loaded');
+        };
+        
+        // Use Font Loading API if available
+        if (document.fonts && document.fonts.ready) {
+          document.fonts.ready.then(showContent);
+        } else {
+          // Fallback for older browsers
+          showContent();
+        }
+        
+        // Safety timeout - always show content after 1.5s max
+        setTimeout(showContent, 1500);
+      })();
+    </script>
     <div id="matrixLayer" class="matrix-layer"></div>
-    <header class="sticky top-0 z-30 w-full px-6 py-5 backdrop-blur-2xl ">
+    <header class="sticky top-0 z-30 w-full px-6 py-5 backdrop-blur-2xl" style="-webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%); mask-image: linear-gradient(to bottom, black 60%, transparent 100%);">
       <div class="mx-auto flex w-full max-w-6xl items-center justify-between">
         <a href="https://www.x402.org/" target="_blank" rel="noreferrer" class="flex items-center gap-3">
           <img src="x402_logo.png" alt="x402 logo" class="h-8 w-auto drop-shadow-[0_15px_35px_rgba(3,7,18,0.45)]" />
         </a>
-        <a
-          href="https://airtable.com/appnYZo360sWuEYLS/pagiPnZRtuwURuAd4/form"
-          target="_blank"
-          rel="noreferrer"
-          class="inline-flex items-center rounded-full border border-white/15 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.3em] text-slate-200 transition hover:border-white/40 hover:text-white"
-        >
-          <span data-scramble data-scramble-slow data-scramble-lock>Join</span>
-        </a>
       </div>
     </header>
 
-    <main class="relative z-20 isolate flex min-h-[calc(100vh-80px)] items-start justify-center px-4 py-10 sm:py-12 lg:py-16">
-      <div class="w-full max-w-6xl ">
-        <div class="grid gap-10 p-6 sm:p-9 lg:p-12">
-          <section class="grid gap-6">
-            <span class="inline-flex w-fit items-center gap-2 rounded-full border border-white/10 px-4 py-1 text-xs uppercase tracking-[0.3em] text-slate-300" data-scramble data-scramble-nowrap>
-              Open to all builders
-            </span>
-            <div class="max-w-4xl">
-              <h1 class="text-7xl font-semibold leading-tight tracking-tight text-white sm:text-8xl lg:text-[6.5rem]" data-scramble data-scramble-nowrap>
-                x402 Hackathon
-              </h1>
-              <p class="mt-5 text-lg text-slate-300 sm:text-xl" data-scramble>
-                Build the next era of agents and internet-native payments.
-              </p>
+    <main class="relative z-20 isolate flex min-h-[calc(100vh-80px)] mt-[-70px] items-start justify-center px-4 overflow-hidden">
+      <div class="relative w-full max-w-6xl pt-[70px] ">
+        <div class="grid gap-10">
+          <section class="relative w-screen left-1/2 -ml-[50vw] -mt-24 pt-24 overflow-hidden min-h-fit">
+            <div class="absolute -top-24 left-0 right-0 bottom-0 w-screen bg-[url('assets/background.png')] bg-cover bg-top bg-no-repeat z-0 pointer-events-none "></div>
+            <div class="absolute -top-24 left-0 right-0 bottom-0 w-screen z-[0.5] pointer-events-none flex items-center justify-center overflow-hidden">
+              <img src="assets/lines-star.svg" alt="" class="w-full h-full object-contain object-center transform scale-[1.55]" />
             </div>
-            <div class="flex flex-wrap items-center gap-6">
-              <a
-                class="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-brand-cyan to-brand-indigo px-8 py-3 text-base font-semibold text-slate-950 ring-1 ring-white/30 transition hover:-translate-y-0.5 hover:ring-white/60"
-                href="https://airtable.com/appnYZo360sWuEYLS/pagiPnZRtuwURuAd4/form"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <span>APPLY TO BUILD</span>
-              </a>
-              <dl class="flex flex-wrap gap-6 text-sm text-slate-300">
-                <div>
-                  <dt class="uppercase tracking-[0.25em] text-xs">Timeline</dt>
-                  <dd class="text-base font-semibold text-white">Nov 25 – Dec 20, 2025</dd>
+            <div class="absolute -top-24 bottom-0 left-0 right-0 noise-layer z-[1] pointer-events-none opacity-30"></div>
+            <div class="absolute -top-24 bottom-0 left-0 right-0 z-[2] pointer-events-none" style="background: linear-gradient(to top, #1E243C 0%, #1E243C 2%, rgba(30, 36, 60, 0) 60%);"></div>
+            <div class="relative z-10 mx-auto w-full max-w-6xl px-4">
+        <div class="grid gap-6 p-6 sm:p-9 lg:p-12 pt-10 sm:pt-12 lg:pt-16">
+          <span class="inline-flex w-fit items-center gap-1 sm:gap-2 rounded-full border border-white/40 px-2.5 sm:px-4 py-0.5 sm:py-1 text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.3em] text-white font-semibold mx-auto" data-scramble data-scramble-nowrap>
+            Open to all builders
+          </span>
+          <div class="max-w-4xl mx-auto">
+            <h1 class="font-tiny160 text-8xl text-center text-white sm:text-9xl md:text-9xl lg:text-[8rem] xl:text-[10rem]" data-scramble data-scramble-nowrap>
+              x402 Hackathon
+            </h1>
+            <p class="mt-5 text-base text-white/80 sm:text-lg md:text-xl text-center" data-scramble>
+              Build the next era of agents and internet-native payments.
+            </p>
+          </div>
+          <div class="flex flex-col items-center gap-6">
+            
+              <dl class="flex flex-wrap gap-4 sm:gap-6 text-xs sm:text-sm text-slate-300 justify-center">
+                <div class="flex flex-col items-center">
+                  <dt class="uppercase tracking-[0.25em] text-[10px] sm:text-xs">Timeline</dt>
+                  <dd class="text-sm sm:text-base font-semibold text-white">December 8, 2025 - January 5, 2026</dd>
                 </div>
-                <div>
-                  <dt class="uppercase tracking-[0.25em] text-xs">Format</dt>
-                  <dd class="text-base font-semibold text-white">Virtual</dd>
+                <div class="flex flex-col items-center">
+                  <dt class="uppercase tracking-[0.25em] text-[10px] sm:text-xs">Format</dt>
+                  <dd class="text-sm sm:text-base font-semibold text-white">Virtual</dd>
                 </div>
                 <div>
                   <!-- <dt class="uppercase tracking-[0.25em] text-xs">Prize Pool</dt>
                   <dd class="text-base font-semibold text-white">$50k + Grants</dd> -->
                 </div>
               </dl>
+              <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                <a
+                  class="inline-flex items-center justify-center text-xs sm:text-sm rounded-full px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-semibold tracking-[0.2em] sm:tracking-[0.3em] text-white transition opacity-70 bg-gradient-to-r from-[rgba(56,189,248,0.25)] to-[rgba(74,222,128,0.3)] hover:opacity-100 transition-opacity duration-1000"
+                  href="https://airtable.com/appnYZo360sWuEYLS/pagiPnZRtuwURuAd4/form"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <span>SUBMIT YOUR BUILD</span>
+                </a>
+                <a
+                  class="inline-flex items-center justify-center text-xs sm:text-sm rounded-full px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-semibold tracking-[0.2em] sm:tracking-[0.3em] text-white transition border border-white/40 hover:bg-white/10 transition-all duration-300"
+                  href="https://t.me/+Sw2XPHfLeIUzYjVh"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <span>JOIN HACKATHON CHAT</span>
+                </a>
+              </div>
             </div>
 
-            <p class="text-lg leading-relaxed text-slate-300 md:text-xl" data-scramble>
-              A focused event to push the web forward with real-world experiences. Remote, curated, and intentionally small.
+          <div class="max-w-2xl mx-auto">
+            <p class="text-base leading-relaxed text-center text-slate-300 mb-20 sm:text-lg" >
+              You do not need to apply to participate, just submit your project by January 5th, 2026. Code submitted must be written during this time period.
             </p>
+          </div>
+        </div>
+      </div>
           </section>
 
           <section class="rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-8">
@@ -150,6 +204,18 @@
                 </p>
               </div>
               <div class="grid gap-4 sm:grid-cols-2">
+                <a
+                  class="flex items-center gap-4 rounded-2xl border border-white/10 bg-slate-900/40 p-4 transition hover:border-white/40"
+                  href="https://x.com/binji_x"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <img src="images/binji.jpg" alt="Binji" class="h-16 w-16 rounded-full object-cover" />
+                  <div>
+                    <p class="text-lg font-semibold text-white">Binji</p>
+                    <p class="text-sm text-slate-300">Etherum Foundation</p>
+                  </div>
+                </a>
                 <a
                   class="flex items-center gap-4 rounded-2xl border border-white/10 bg-slate-900/40 p-4 transition hover:border-white/40"
                   href="https://x.com/0xMasonH"
@@ -199,6 +265,18 @@
                   </div>
                 </a>
                 <a
+                class="flex items-center gap-4 rounded-2xl border border-white/10 bg-slate-900/40 p-4 transition hover:border-white/40"
+                href="https://x.com/KhanAbbas201"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img src="images/abbas.jpg" alt="Kevin Leffew" class="h-16 w-16 rounded-full object-cover" />
+                <div>
+                  <p class="text-lg font-semibold text-white">Abbas Khan</p>
+                  <p class="text-sm text-slate-300">Ethereum Foundation</p>
+                </div>
+              </a>
+                <a
                   class="flex items-center gap-4 rounded-2xl border border-white/10 bg-slate-900/40 p-4 transition hover:border-white/40"
                   href="https://x.com/cryptomastery_"
                   target="_blank"
@@ -212,14 +290,50 @@
                 </a>
                 <a
                 class="flex items-center gap-4 rounded-2xl border border-white/10 bg-slate-900/40 p-4 transition hover:border-white/40"
-                href="https://x.com/dabit3"
+                href="https://x.com/jarrodwatts"
                 target="_blank"
                 rel="noreferrer"
               >
-                <img src="images/naderdabit.jpg" alt="Nader Dabit" class="h-16 w-16 rounded-full object-cover" />
+                <img src="images/jarrod.jpg" alt="Abril Zucchi" class="h-16 w-16 rounded-full object-cover" />
                 <div>
-                  <p class="text-lg font-semibold text-white">Nader Dabit</p>
-                  <p class="text-sm text-slate-300">Eigen Labs</p>
+                  <p class="text-lg font-semibold text-white">Jarrod Watts</p>
+                  <p class="text-sm text-slate-300">Abstract</p>
+                </div>
+              </a>
+                <a
+                  class="flex items-center gap-4 rounded-2xl border border-white/10 bg-slate-900/40 p-4 transition hover:border-white/40"
+                  href="https://x.com/dabit3"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <img src="images/naderdabit.jpg" alt="Nader Dabit" class="h-16 w-16 rounded-full object-cover" />
+                  <div>
+                    <p class="text-lg font-semibold text-white">Nader Dabit</p>
+                    <p class="text-sm text-slate-300">Eigen Labs</p>
+                  </div>
+                </a>
+                <a
+                class="flex items-center gap-4 rounded-2xl border border-white/10 bg-slate-900/40 p-4 transition hover:border-white/40"
+                href="https://x.com/bitfalls"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img src="images/bskvorc.jpg" alt="Bruno Skvorc" class="h-16 w-16 rounded-full object-cover" />
+                <div>
+                  <p class="text-lg font-semibold text-white">Bruno Skvorc</p>
+                  <p class="text-sm text-slate-300">Polygon</p>
+                </div>
+              </a>
+              <a
+                class="flex items-center gap-4 rounded-2xl border border-white/10 bg-slate-900/40 p-4 transition hover:border-white/40"
+                href="https://x.com/joenrv"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img src="images/joaquim.jpg" alt="Joaquim Verges" class="h-16 w-16 rounded-full object-cover" />
+                <div>
+                  <p class="text-lg font-semibold text-white">Joaquim Verges</p>
+                  <p class="text-sm text-slate-300">thirdweb</p>
                 </div>
               </a>
                 <a
@@ -258,6 +372,18 @@
                     <p class="text-sm text-slate-300">Crossmint</p>
                   </div>
                 </a>
+              <a
+              class="flex items-center gap-4 rounded-2xl border border-white/10 bg-slate-900/40 p-4 transition hover:border-white/40"
+              href="https://x.com/classicscuba"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img src="images/pontus.jpg" alt="Pontus Andersson" class="h-16 w-16 rounded-full object-cover" />
+              <div>
+                <p class="text-lg font-semibold text-white">Pontus Andersson</p>
+                <p class="text-sm text-slate-300">Corbits + Faremeter</p>
+              </div>
+            </a>
               </div>
             </div>
           </section>
@@ -268,14 +394,15 @@
                 <h2 class="text-2xl font-semibold text-white sm:text-3xl">Format</h2>
                 <p class="
                 text-base leading-relaxed text-slate-300 sm:text-lg">
-                 A 4 week virtual event focused on shipping real products, apps, and impactful open source. Participants will receive S tier mentorship from industry experts. Winners will receive extensive
+                 A 4 week virtual event focused on shipping real products, apps, and impactful open source. Participants will receive mentorship from industry experts. <br /><br />
+                 
+                 Please note that there are no financial prizes for this hackathon. Winners will receive marketing and distribution support from contributors such as social posts and live streams. They will also have access to mentorship, invitations to major events and hacker houses, and potential grant opportunities.
                 </p>
               </div>
               <a
                 target="_blank"
                 href="https://x402.gitbook.io/x402"
-                class="inline-flex items-center justify-center rounded-full border-2 border-white px-8 py-3 text-base font-semibold text-white transition hover:border-white/40 hover:bg-white/5 hover:shadow-lg hover:shadow-white/10"
-              >
+                class="inline-flex items-center justify-center rounded-full border border-white/60 bg-white/10 hover:bg-white/30 px-8 py-3 text-base font-semibold tracking-[0.3em] text-white transition duration-1000"
                 <span>RESOURCES</span>
               </a>
               <!-- <div class="grid flex-1 grid-cols-1 gap-4 sm:grid-cols-3">
@@ -295,16 +422,16 @@
             </div>
           </section>
 
-          <section class="rounded-3xl border border-dashed border-white/20 bg-white/5 p-6 sm:p-8">
+          <section class="relative z-10 rounded-3xl border border-dashed border-white/20  backdrop-blur-sm p-6 sm:p-8">
             <div class="flex flex-wrap items-center justify-between gap-4">
               <div>
-                <h3 class="text-xl font-semibold text-white sm:text-2xl">Sponsors</h3>
+                <h3 class="text-xl font-semibold text-white sm:text-2xl">Contributors</h3>
                 <p class="text-sm text-slate-300" data-scramble>Slots available · inquire for details</p>
               </div>
               <button
                 class="rounded-full border border-white/20 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-slate-300 transition hover:border-white/40 hover:text-white"
               >
-                <span data-scramble data-scramble-lock>Become a sponsor</span>
+                <span data-scramble data-scramble-lock>Become a contributor</span>
               </button>
             </div>
             <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -326,14 +453,6 @@
               </a>
               <a
                 class="flex h-28 items-center justify-center rounded-2xl border border-white/10 bg-slate-900/40 px-6 transition hover:border-white/40"
-                href="https://www.base.org"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <img src="images/base.png" alt="Base logo" class="max-h-12 w-auto opacity-90" />
-              </a>
-              <a
-                class="flex h-28 items-center justify-center rounded-2xl border border-white/10 bg-slate-900/40 px-6 transition hover:border-white/40"
                 href="https://edgeandnode.com"
                 target="_blank"
                 rel="noreferrer"
@@ -348,9 +467,17 @@
             >
               <img src="images/meritsystems.png" alt="Merit Systems logo" class="max-h-12 w-auto opacity-90" />
             </a>
+            <a
+              class="flex h-28 items-center justify-center rounded-2xl border border-white/10 bg-slate-900/40 px-6 transition hover:border-white/40"
+              href="https://www.abs.xyz"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img src="images/abstract.png" alt="Abstract logo" class="max-h-12 w-auto opacity-90" />
+            </a>
               <a
                 class="flex h-28 items-center justify-center rounded-2xl border border-white/10 bg-slate-900/40 px-6 transition hover:border-white/40"
-                href="https://www.eigencloud.xyz"
+                href="https://developers.eigencloud.xyz/"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -364,16 +491,50 @@
               >
                 <img src="images/crossmint.png" alt="Crossmint logo" class="max-h-12 w-auto opacity-90" />
               </a>
+              <a
+              class="flex h-28 items-center justify-center rounded-2xl border border-white/10 bg-slate-900/40 px-6 transition hover:border-white/40"
+              href="https://www.polygon.technology"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img src="images/polygon.svg" alt="Polygon logo" style="width: 120px;" class="max-h-12 w-auto opacity-90" />
+            </a>
+            <a
+              class="flex h-28 items-center justify-center rounded-2xl border border-white/10 bg-slate-900/40 px-6 transition hover:border-white/40"
+              href="https://thirdweb.com"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img src="images/thirdweb.svg" alt="thirdweb logo" style="width: 120px;" class="max-h-12 w-auto opacity-90" />
+            </a>
+            <a
+            class="flex h-28 items-center justify-center rounded-2xl border border-white/10 bg-slate-900/40 px-6 transition hover:border-white/40"
+            href="https://corbits.dev"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img src="images/corbits.svg" alt="corbits logo" style="width: 120px;" class="max-h-12 w-auto opacity-90" />
+          </a>
             </div>
           </section>
         </div>
       </div>
+      <div class="absolute translate-y-[80px] bottom-0 opacity-50 left-0 right-0 w-full z-[1] pointer-events-none">
+        <img src="assets/lines-waves.svg" alt="" class="w-full h-auto object-cover object-bottom transform scale-150" />
+      </div>
     </main>
     <footer class="relative z-20 px-6 py-10 text-center text-sm text-slate-400">
-      To learn more about x402, visit
-      <a href="https://www.x402.org" target="_blank" rel="noreferrer" class="text-brand-cyan transition hover:text-white">
-        https://www.x402.org
-      </a>
+      <p>
+        To learn more about x402, visit
+        <a href="https://www.x402.org" target="_blank" rel="noreferrer" class="text-brand-cyan transition hover:text-white">
+          https://www.x402.org
+        </a>
+      </p>
+      <p class="mt-2">
+        <a href="terms.html" class="text-slate-500 transition hover:text-white">
+          Terms and Conditions
+        </a>
+      </p>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
     <script>
