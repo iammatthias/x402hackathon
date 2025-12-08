@@ -422,12 +422,48 @@
             <div class="relative z-10">
               <div class="flex flex-col gap-2 mb-6">
                 <p data-scramble class="text-sm uppercase tracking-[0.35em] text-brand-cyan/80">Get Started</p>
-                <h2 data-scramble class="text-2xl font-semibold text-white sm:text-3xl">Bootstrap your app</h2>
-                <p data-scramble class="text-base text-slate-300 max-w-2xl">
-                  Use these tools to bootstrap your project in minutes.
+                <h2 data-scramble class="text-2xl font-semibold text-white sm:text-3xl">Developer Resources</h2>
+                <p class="text-base text-slate-300 max-w-2xl">
+                  Use these resources to bootstrap your project and integrate x402 in novel ways.
                 </p>
               </div>
-              <div class="grid gap-4 sm:grid-cols-2">
+              <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                 <!-- Builder Resources Card -->
+                 <a
+                 class="group relative flex flex-col gap-4 rounded-2xl border border-white/10 bg-slate-900/50 p-6 transition-all duration-300 hover:border-emerald-400/40 hover:bg-slate-900/70 hover:shadow-[0_0_30px_-5px_rgba(52,211,153,0.15)]"
+                 href="https://www.notion.so/Builder-Resources-2bd3db1c88a78060bddfe8c03bf88c1a"
+                 target="_blank"
+                 rel="noreferrer"
+               >
+                 <div class="flex items-start justify-between">
+                   <div class="flex items-center gap-3">
+                     <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500/20 to-teal-500/20 border border-white/10">
+                       <svg class="h-6 w-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                       </svg>
+                     </div>
+                     <div>
+                       <h3 class="text-lg font-semibold text-white group-hover:text-emerald-400 transition-colors">Builder Resources</h3>
+                       <p class="text-xs text-slate-400 font-mono">From Contributors</p>
+                     </div>
+                   </div>
+                   <svg class="h-5 w-5 text-slate-500 group-hover:text-emerald-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M17 7H7M17 7v10"/>
+                   </svg>
+                 </div>
+                 <p class="text-sm text-slate-300 leading-relaxed">
+                   Curated docs, tutorials, and tooling from hackathon contributors and their companies to help you build faster.
+                 </p>
+                 <div class="flex items-center gap-2 mt-auto pt-2">
+                   <span class="inline-flex items-center gap-1.5 rounded-full bg-white/5 border border-white/10 px-2.5 py-1 text-xs text-slate-400">
+                     <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
+                     Docs & Guides
+                   </span>
+                   <span class="inline-flex items-center gap-1.5 rounded-full bg-white/5 border border-white/10 px-2.5 py-1 text-xs text-slate-400">
+                     Contributor Tools
+                   </span>
+                 </div>
+               </a>
                 <!-- create-x402 Card -->
                 <a
                   class="group relative flex flex-col gap-4 rounded-2xl border border-white/10 bg-slate-900/50 p-6 transition-all duration-300 hover:border-brand-cyan/40 hover:bg-slate-900/70 hover:shadow-[0_0_30px_-5px_rgba(93,216,255,0.15)]"
@@ -501,13 +537,15 @@
                     </span>
                   </div>
                 </a>
+
+               
               </div>
             </div>
           </section>
 
           <section class="rounded-3xl border border-white/10 bg-slate-900/60 p-6 sm:p-8 lg:p-9">
-            <div class="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
-              <div class="max-w-2xl space-y-4">
+            <div class="flex flex-col gap-6">
+              <div class="space-y-4">
                 <h2 class="text-2xl font-semibold text-white sm:text-3xl" data-i18n="formatSection.heading">Format</h2>
                 <p class="text-base leading-relaxed text-slate-300 sm:text-lg" data-i18n="formatSection.description">
                  A 4 week virtual event focused on shipping real products, apps, and impactful open source. Participants will receive mentorship from industry experts. <br /><br />
@@ -515,12 +553,6 @@
                  Please note that there are no financial prizes for this hackathon. Winners will receive marketing and distribution support from contributors such as social posts and live streams. They will also have access to mentorship, invitations to major events and hacker houses, and potential grant opportunities.
                 </p>
               </div>
-              <a
-                target="_blank"
-                href="https://www.notion.so/Builder-Resources-2bd3db1c88a78060bddfe8c03bf88c1a"
-                class="inline-flex items-center justify-center rounded-full border border-white/60 bg-white/10 hover:bg-white/30 px-8 py-3 text-base font-semibold tracking-[0.3em] text-white transition duration-1000">
-                <span data-i18n="formatSection.resources">DEVELOPER RESOURCES</span>
-              </a>
               <!-- <div class="grid flex-1 grid-cols-1 gap-4 sm:grid-cols-3">
                 <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
                   <span class="text-xs uppercase tracking-[0.25em] text-slate-400">Focus</span>
