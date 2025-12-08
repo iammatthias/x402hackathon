@@ -1,0 +1,49 @@
+{
+  "meta": {
+    "title": "x402 Hackathon - Build Internet-Native Payments",
+    "description": "An open sprint for builders shipping agents, protocols, and products on the x402 standard."
+  },
+  "header": {
+    "join": "Join"
+  },
+  "hero": {
+    "badge": "Open to all builders",
+    "title": "x402 Hackathon",
+    "tagline": "Build the next era of agents and internet-native payments.",
+    "timeline": "Timeline",
+    "date": "December 8, 2025 - January 5, 2026",
+    "format": "Format",
+    "virtual": "Virtual",
+    "submit": "SUBMIT YOUR BUILD",
+    "chat": "JOIN HACKATHON CHAT",
+    "description": "You do not need to apply to participate, just submit your project by January 5th, 2026. Code submitted must be written during this time period."
+  },
+  "mentors": {
+    "label": "Mentor bench",
+    "heading": "Experts who ship with you",
+    "description": "A tight roster of hands-on mentors sharing expertise across product, AI, infrastructure, and GTM."
+  },
+  "formatSection": {
+    "heading": "Format",
+    "description": "A 4 week virtual event focused on shipping real products, apps, and impactful open source. Participants will receive mentorship from industry experts. Please note that there are no financial prizes for this hackathon. Winners will receive marketing and distribution support from contributors such as social posts and live streams. They will also have access to mentorship, invitations to major events and hacker houses, and potential grant opportunities.",
+    "resources": "RESOURCES"
+  },
+  "contributors": {
+    "heading": "Contributors",
+    "slots": "Slots available - inquire for details",
+    "become": "Become a contributor"
+  },
+  "footer": {
+    "learnMore": "To learn more about x402, visit",
+    "terms": "Terms and Conditions"
+  },
+  "terms": {
+    "pageTitle": "Terms and Conditions — x402 Hackathon",
+    "metaDescription": "Terms and Conditions for the x402 Hackathon",
+    "title": "Terms and Conditions",
+    "lastUpdated": "Last updated:",
+    "legalNotice": "These Terms and Conditions are only available in English.",
+    "backToHackathon": "← Back to Hackathon",
+    "backFooter": "← Back to x402 Hackathon"
+  }
+}

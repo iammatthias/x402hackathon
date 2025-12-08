@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" class="bg-[#030616] overscroll-none">
+<html lang="en" class="bg-[#030616] overscroll-none" data-lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Terms and Conditions — x402 Hackathon</title>
-    <meta name="description" content="Terms and Conditions for the x402 Hackathon" />
+    <title data-i18n="terms.pageTitle">Terms and Conditions — x402 Hackathon</title>
+    <meta name="description" data-i18n-attr="content" data-i18n="terms.metaDescription" content="Terms and Conditions for the x402 Hackathon" />
     <link rel="icon" type="image/png" href="assets/favicon.png" />
     <link rel="apple-touch-icon" href="assets/favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -46,16 +46,36 @@
         <a href="index.html" class="flex items-center gap-3">
           <img src="x402_logo.png" alt="x402 logo" class="h-8 w-auto" />
         </a>
-        <a href="index.html" class="text-sm text-slate-300 hover:text-white transition">
-          ← Back to Hackathon
-        </a>
+        <div class="flex items-center gap-4">
+          <!-- Language Switcher -->
+          <div class="relative inline-flex items-center">
+            <select id="langSwitcher" class="appearance-none bg-white/20 backdrop-blur-sm border border-slate-700/50 rounded-full px-4 py-1.5 pr-8 text-xs font-semibold uppercase tracking-[0.3em] text-slate-300 cursor-pointer hover:bg-white/30 transition focus:outline-none">
+              <option value="en" class="bg-slate-900 text-white">EN</option>
+              <option value="es" class="bg-slate-900 text-white">ES</option>
+              <option value="fr" class="bg-slate-900 text-white">FR</option>
+              <option value="pt" class="bg-slate-900 text-white">PT</option>
+            </select>
+            <svg class="pointer-events-none absolute right-3 h-3 w-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </div>
+          <a href="index.html" class="text-sm text-slate-300 hover:text-white transition" data-i18n="terms.backToHackathon">
+            ← Back to Hackathon
+          </a>
+        </div>
       </div>
     </header>
 
     <main class="relative z-20 px-6 py-12">
       <div class="mx-auto max-w-4xl">
-        <h1 class="text-4xl font-bold text-white mb-8">Terms and Conditions</h1>
-        <p class="text-sm text-slate-400 mb-8">Last updated: December 4, 2025</p>
+        <h1 class="text-4xl font-bold text-white mb-4" data-i18n="terms.title">Terms and Conditions</h1>
+        <p class="text-sm text-slate-400 mb-4"><span data-i18n="terms.lastUpdated">Last updated:</span> December 4, 2025</p>
+        <!-- Legal notice about official language -->
+        <div class="bg-slate-800/50 border border-slate-700/50 rounded-lg p-4 mb-8">
+          <p class="text-sm text-slate-300" data-i18n="terms.legalNotice">
+            These Terms and Conditions are only available in English.
+          </p>
+        </div>
 
         <div class="space-y-8 text-slate-300 leading-relaxed">
           <section>
@@ -180,10 +200,117 @@
     </main>
 
     <footer class="relative z-20 px-6 py-10 text-center text-sm text-slate-400">
-      <a href="index.html" class="text-brand-cyan transition hover:text-white">
+      <a href="index.html" class="text-brand-cyan transition hover:text-white" data-i18n="terms.backFooter">
         ← Back to x402 Hackathon
       </a>
     </footer>
+    <!-- i18n Internationalization -->
+    <script>
+      (function() {
+        const i18n = {
+          translations: {},
+          currentLang: 'en',
+          supportedLangs: ['en', 'es', 'fr', 'pt'],
+
+          async loadTranslations(lang) {
+            try {
+              const response = await fetch(`./i18n/${lang}.json`);
+              if (!response.ok) throw new Error('Translation file not found');
+              this.translations[lang] = await response.json();
+              return true;
+            } catch (error) {
+              console.error(`Failed to load translations for ${lang}:`, error);
+              return false;
+            }
+          },
+
+          getNestedValue(obj, path) {
+            return path.split('.').reduce((current, key) => current && current[key], obj);
+          },
+
+          translate(key) {
+            const translation = this.getNestedValue(this.translations[this.currentLang], key);
+            if (!translation) {
+              const fallback = this.getNestedValue(this.translations['en'], key);
+              return fallback || key;
+            }
+            return translation;
+          },
+
+          applyTranslations() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+              const key = el.getAttribute('data-i18n');
+              const translation = this.translate(key);
+
+              const attrToUpdate = el.getAttribute('data-i18n-attr');
+              if (attrToUpdate) {
+                el.setAttribute(attrToUpdate, translation);
+              } else if (el.tagName === 'TITLE') {
+                document.title = translation;
+              } else {
+                el.textContent = translation;
+              }
+            });
+
+            document.documentElement.lang = this.currentLang;
+            document.documentElement.dataset.lang = this.currentLang;
+          },
+
+          async setLanguage(lang) {
+            if (!this.supportedLangs.includes(lang)) {
+              lang = 'en';
+            }
+
+            if (!this.translations[lang]) {
+              await this.loadTranslations(lang);
+            }
+
+            if (!this.translations['en']) {
+              await this.loadTranslations('en');
+            }
+
+            this.currentLang = lang;
+            localStorage.setItem('preferredLanguage', lang);
+            this.applyTranslations();
+
+            const langSwitcher = document.getElementById('langSwitcher');
+            if (langSwitcher) {
+              langSwitcher.value = lang;
+            }
+          },
+
+          async init() {
+            const savedLang = localStorage.getItem('preferredLanguage');
+            const browserLang = navigator.language.split('-')[0];
+            const initialLang = savedLang || (this.supportedLangs.includes(browserLang) ? browserLang : 'en');
+
+            await this.loadTranslations('en');
+            if (initialLang !== 'en') {
+              await this.loadTranslations(initialLang);
+            }
+
+            this.currentLang = initialLang;
+            this.applyTranslations();
+
+            const langSwitcher = document.getElementById('langSwitcher');
+            if (langSwitcher) {
+              langSwitcher.value = initialLang;
+              langSwitcher.addEventListener('change', (e) => {
+                this.setLanguage(e.target.value);
+              });
+            }
+          }
+        };
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', () => i18n.init());
+        } else {
+          i18n.init();
+        }
+
+        window.i18n = i18n;
+      })();
+    </script>
   </body>
 </html>
 
